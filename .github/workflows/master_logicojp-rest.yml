@@ -53,11 +53,15 @@ jobs:
           tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_038FFB42EAC942DF83BF380FC5ED0035 }}
           subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_37D2BB4E75854DA49735A6FBA70A06B6 }}
 
+      - name: directory check
+        run: |
+          ls ${{ github.workspace }}
+        
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v3
         with:
           app-name: 'logicojp-rest'
           slot-name: 'Production'
-          package: '${{ github.workspace }}/target/*.jar'
+          package: '*.jar'
           
