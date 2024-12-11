@@ -15,12 +15,12 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-
       - name: Set up Java version
         uses: actions/setup-java@v4
         with:
           java-version: '21'
           distribution: 'microsoft'
+          check-latest: true
 
       - name: Build with Maven
         run: mvn clean install
