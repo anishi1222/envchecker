@@ -59,4 +59,5 @@ jobs:
         with:
           app-name: 'logicojp-rest'
           slot-name: 'Production'
+          package: '${{ github.workspace }}/target/*.jar'
           
