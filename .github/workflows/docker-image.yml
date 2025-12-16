@@ -1,0 +1,53 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.ref }}
+  cancel-in-progress: true  
+
+env:
+  TAG: ${{ secrets.DOCKERHUB_USERNAME }}/headerchecker:${{ vars.JDK_VERSION }}
+
+jobs:
+  build_with_JDK:
+
+    runs-on: ubuntu-latest
+    steps:
+    - name: CheckOut
+      uses: actions/checkout@v4
+
+    - name: Log in to Docker Hub
+      uses: docker/login-action@v3
+      with:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
+    
+    - name: Build the Docker image (JDK)
+      run: |
+        docker build . --file Dockerfile --tag ${{ env.TAG }}
+        docker push ${{ env.TAG }}
+
+  build_with_GraalVM:
+
+    runs-on: ubuntu-latest
+    steps:
+    - name: CheckOut
+      uses: actions/checkout@v4
+
+    - name: Log in to Docker Hub
+      uses: docker/login-action@v3
+      with:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
+    
+    - name: Build the Docker image (GraalVM)
+      run: |
+        export DOCKER_BUILDKIT=1
+        docker build . --file Dockerfile.native --tag ${{ env.TAG }}-native
+        docker push ${{ env.TAG }}-native
