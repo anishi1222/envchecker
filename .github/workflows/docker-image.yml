@@ -12,7 +12,7 @@ concurrency:
   cancel-in-progress: true  
 
 env:
-  TAG: ${{ secrets.DOCKERHUB_USERNAME }}/headerchecker:${{ vars.JDK_VERSION }}
+  TAG: ${{ secrets.DOCKERHUB_USERNAME }}/envchecker:${{ vars.JDK_VERSION }}
 
 jobs:
   build_with_JDK:
