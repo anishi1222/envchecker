@@ -1,0 +1,25 @@
+ARG BUILD_IMAGE=container-registry.oracle.com/graalvm/native-image:25.0.2-ol9-20260120
+ARG CORE_IMAGE=mcr.microsoft.com/cbl-mariner/base/core:2.0-nonroot
+
+# ---------------------------------------------------
+# Build an artifact
+# ---------------------------------------------------
+FROM ${BUILD_IMAGE} AS build
+RUN microdnf install maven
+WORKDIR /app
+# ENV TMPDIR=/workspace/.tmp
+# RUN mkdir -p $TMPDIR
+COPY pom.xml ./
+COPY src ./src
+
+RUN --mount=type=tmpfs,target=/tmp mvn -B clean package -Dpackaging=native-image -Pgraalvm -Dmaven.test.skip
+
+# ---------------------------------------------------
+# Build container
+# ---------------------------------------------------
+FROM ${CORE_IMAGE}
+WORKDIR /opt/app
+
+COPY --from=build /app/target/envchecker ./app
+EXPOSE 8080
+ENTRYPOINT ["./app"]
