@@ -1,4 +1,4 @@
-ARG BUILD_IMAGE=maven:3.9.11-eclipse-temurin-25
+ARG BUILD_IMAGE=maven:3.9.16-eclipse-temurin-25
 ARG RUNTIME_IMAGE=mcr.microsoft.com/openjdk/jdk:25-distroless
 
 #ARG PROXY_SET=false
