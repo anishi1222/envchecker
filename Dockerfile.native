@@ -1,4 +1,4 @@
-ARG BUILD_IMAGE=container-registry.oracle.com/graalvm/native-image:25.0.2-ol9-20260120
+ARG BUILD_IMAGE=container-registry.oracle.com/graalvm/native-image:25.0.3-ol9-20260421
 ARG CORE_IMAGE=mcr.microsoft.com/cbl-mariner/base/core:2.0-nonroot
 
 # ---------------------------------------------------
