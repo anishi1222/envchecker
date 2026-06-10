@@ -12,7 +12,7 @@ WORKDIR /app
 COPY pom.xml ./
 COPY src ./src
 
-RUN --mount=type=tmpfs,target=/tmp mvn -B clean package -Dpackaging=native-image -Pgraalvm -Dmaven.test.skip
+RUN --mount=type=cache,target=/root/.m2 mvn clean package -Dpackaging=native-image -Pgraalvm -Dmaven.test.skip
 
 # ---------------------------------------------------
 # Build container
