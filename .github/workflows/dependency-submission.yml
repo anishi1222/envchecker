@@ -13,7 +13,7 @@ jobs:
     permissions:
       contents: write
     steps:
-      - name: CheckOut
+      - name: Check out
         uses: actions/checkout@v4
 
       - name: Set up Java 25
