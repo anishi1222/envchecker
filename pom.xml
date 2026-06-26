@@ -18,6 +18,7 @@
         <jdk.version>25</jdk.version>
         <release.version>25</release.version>
         <micronaut.version>5.0.2</micronaut.version>
+        <jackson.version>3.1.4</jackson.version>
         <micronaut.aot.enabled>false</micronaut.aot.enabled>
         <micronaut.aot.packageName>com.example.aot.generated</micronaut.aot.packageName>
         <micronaut.runtime>netty</micronaut.runtime>
